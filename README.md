@@ -15,6 +15,8 @@
 
 - SELECT FROM
 
+- Write SQL queries using your database to Filter records, Sort records, Search using LIKE/ILIKE, Perform aggregate calculations, Group and analyse data
+
 ## Instructions to Run:
 1. Install PostgreSQL 
 
@@ -25,7 +27,10 @@
 3. Create a database using SQL:
     - Run: CREATE DATABASE test;
 
-4. Create a table with constraints as shown in person.sql file:
+4. To connect to test database in psql:
+    - Use \c command - \c test
+
+5. Create a table with constraints as shown in person.sql file:
 
         CREATE TABLE person (
         id BIGSERIAL NOT NULL PRIMARY KEY,
@@ -36,14 +41,14 @@
         email VARCHAR(150) 
         );
 
-5. Insert Values into table:
+6. Insert Values into table:
 
         INSERT INTO person (first_name, last_name, gender, date_of_birth) VALUES ('Anne', 'Mary', 'FEMALE', date '1980-10-31');
 
-6. To Run person.sql file directly in psql shell:
+7. To Run person.sql file directly in psql shell:
     - Use command - \i (insert file path)
 
-7. Retrieve records in table using SQL:
+8. Retrieve records in table using SQL:
         SELECT * FROM person;
 
 
