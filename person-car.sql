@@ -27,3 +27,10 @@ INSERT INTO car (id, make, model, price) VALUES (2, 'Dodge', 'Ram 1500', '93582.
 
 UPDATE person SET car_id = 1 WHERE id=2;
 UPDATE person SET car_id = 2 WHERE id=1;
+
+-- INNER JOIN: Get common data in both tables
+SELECT * FROM person JOIN car ON person.car_id = car.id;
+SELECT person.first_name, person.last_name, car.make, car.model, car.price FROM person JOIN car ON person.car_id = car.id;
+
+-- LEFT JOIN: Includes all records in left table and records common in both tables
+SELECT * FROM person LEFT JOIN car ON person.car_id = car.id;
