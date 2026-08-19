@@ -17,6 +17,18 @@
 
 - Write SQL queries using your database to Filter records, Sort records, Search using LIKE/ILIKE, Perform aggregate calculations, Group and analyse data
 
+- Design tables for the project
+
+- Add primary and foreign keys
+
+- Create relationships between tables
+
+- Perform CRUD operations
+
+- Practise JOIN queries
+
+- Experiment with UUID
+
 ## Instructions to Run:
 1. Install PostgreSQL 
 
@@ -53,3 +65,10 @@
 
 
 ![alt text](image.png)
+
+9. Download extension to use UUID in PostgreSQL:
+
+        CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
+10. To view list of functions available from extension:
+    - Run command: \df
