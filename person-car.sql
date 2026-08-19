@@ -1,36 +1,29 @@
 CREATE TABLE car (
-	id BIGSERIAL NOT NULL PRIMARY KEY,
+	car_uid UUID NOT NULL PRIMARY KEY,
 	make VARCHAR(100) NOT NULL,
 	model VARCHAR(100) NOT NULL,
-	price NUMERIC(19,2) NOT NULL
+	price NUMERIC(19,2) NOT NULL CHECK (price>0)
 );
 
 -- Foreign Key which references id column in car table. One Person can have a car or not - can be NULL
 -- Car id should be unique as a car can be owned by only one person 
 CREATE TABLE person (
-    id BIGSERIAL NOT NULL PRIMARY KEY,
+    person_uid UUID NOT NULL PRIMARY KEY,
     first_name VARCHAR(50) NOT NULL,
     last_name VARCHAR(50) NOT NULL,
     gender VARCHAR(7) NOT NULL,
     date_of_birth DATE NOT NULL,
     email VARCHAR(150),
-    car_id BIGINT REFERENCES car (id),
-    UNIQUE(car_id)
+    car_uid UUID REFERENCES car (car_uid),
+    UNIQUE(car_uid),
+    UNIQUE(email)
 );
 
-INSERT INTO person (first_name, last_name, gender, date_of_birth) VALUES ('Anne', 'Mary', 'FEMALE', date '1980-10-31');
-INSERT INTO person (first_name, last_name, gender, date_of_birth, email) VALUES ('Damien', 'Lovegood', 'MALE', date '1982-10-31', 'damien@gmail.com');
-INSERT INTO person (first_name, last_name, gender, date_of_birth) VALUES ('Shayne', 'Top', 'MALE', date '1982-12-31');
+INSERT INTO person (person_uid, first_name, last_name, gender, date_of_birth) VALUES (uuid_generate_v4(), 'Anne', 'Mary', 'FEMALE', date '1980-10-31');
+INSERT INTO person (person_uid, first_name, last_name, gender, date_of_birth, email) VALUES (uuid_generate_v4(), 'Damien', 'Lovegood', 'MALE', date '1982-10-31', 'damien@gmail.com');
+INSERT INTO person (person_uid, first_name, last_name, gender, date_of_birth) VALUES (uuid_generate_v4(), 'Shayne', 'Top', 'MALE', date '1982-12-31');
 
-INSERT INTO car (id, make, model, price) VALUES (1, 'BMW', '6 Series', '12650.05');
-INSERT INTO car (id, make, model, price) VALUES (2, 'Dodge', 'Ram 1500', '93582.53');
+INSERT INTO car (car_uid, make, model, price) VALUES (uuid_generate_v4(), 'BMW', '6 Series', '12650.05');
+INSERT INTO car (car_uid, make, model, price) VALUES (uuid_generate_v4(), 'Dodge', 'Ram 1500', '93582.53');
 
-UPDATE person SET car_id = 1 WHERE id=2;
-UPDATE person SET car_id = 2 WHERE id=1;
 
--- INNER JOIN: Get common data in both tables
-SELECT * FROM person JOIN car ON person.car_id = car.id;
-SELECT person.first_name, person.last_name, car.make, car.model, car.price FROM person JOIN car ON person.car_id = car.id;
-
--- LEFT JOIN: Includes all records in left table and records common in both tables
-SELECT * FROM person LEFT JOIN car ON person.car_id = car.id;
