@@ -42,3 +42,15 @@ SELECT id,make,model,price AS original_price, ROUND(price*.10,2) AS discount_ten
 SELECT gender, COUNT(*) FROM person GROUP BY gender;
 SELECT make,model, MIN(price) FROM car GROUP BY make, model;
 SELECT make, SUM(price) FROM car GROUP BY make;
+
+-- Timestamps and DATE
+SELECT NOW();
+SELECT NOW()::DATE;
+SELECT NOW()::TIME;
+SELECT EXTRACT(YEAR FROM NOW());
+SELECT EXTRACT(MONTH FROM NOW());
+-- Subtract 10 Years from Current year 
+SELECT NOW() - INTERVAL '10 YEAR'; 
+
+-- Extract person's age from date of birth
+SELECT first_name, last_name, date_of_birth, EXTRACT(YEAR FROM AGE(NOW(), date_of_birth)) AS age FROM person;
